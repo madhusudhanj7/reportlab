@@ -17,11 +17,14 @@ from reportlab.lib import colors
 from reportlab.graphics.shapes import *
 from reportlab.graphics import renderPDF
 from reportlab.graphics.shapes import Drawing
-
+from reportlab.pdfgen.canvas import Canvas
 from reportlab.graphics.shapes import *
 from reportlab.graphics import renderPDF
-
-from reportlab.lib.colors import white, gray
+from reportlab.pdfgen.canvas import Canvas
+from reportlab.lib.colors import red, yellow, green
+from reportlab.lib.units import mm
+from reportlab.lib import colors
+from reportlab.graphics.shapes import *
 
 styles=getSampleStyleSheet()
 stylesN = styles['Normal']
@@ -69,85 +72,95 @@ img = GNAA(logo1, 9.1*inch, 6*inch)
 elements.append(img)
 elements.append(Spacer(1, 3))
 
-
-
-
 #for BACKSIDE VIEW
-
 
 ppar1 = Paragraph('<para  align="LEFT"><b>Vollastahseil, 9 litzen,gensondert verseilt</b> <br/>Fur hochste Anforderungen im Bezug auf BruchKraft<br/>Dehnung und Fahrtenzahl, auch bei erschwerten <br/>montagesitunationen. Empfohlen fur Runderillen mit<br/>einem Unterschnittwinkel < 85.<br/><br/> <b>steel core rope,9 dtrands, seperate lay</b><br/>For highest demandas on breaking force, elongation<br/>and number of trips, also under difficult instalation<br/>condtions. Recommended for round grooves with an <br/>undercut angle of < 85.</para>',styles['Normal'])
 parag1 = [[ppar1]]
-paragar=Table(parag1,colWidths=(100*mm),rowHeights=(50*mm))
+paragar=Table(parag1,colWidths=(90*mm),rowHeights=(50*mm))
 # elements.append(paragar)
-tp1 = Paragraph('<para fontSize=7 ><b>E-Module</b></para>',styles['Normal'])
+tp1 = Paragraph('<para fontSize=7>E-Module</para>',styles['Normal'])
+b1 = [[tp1]]
+tpl1 = Table(b1)
+
 datatab1 = [
-['120,000' ],
-['N/mm2'],
-[tp1],
-]
-tab1=Table(datatab1,colWidths=(20*mm),rowHeights=(10*mm))
+   ['120,000' ],
+   ['N/mm2'],
+   ]
+tab1=Table(datatab1,colWidths=(14*mm),rowHeights=(7*mm))
 tab1.setStyle(TableStyle([('TEXTFONT', (0, 0), (-1, -1), 'Times-Bold'),
-                    ('BACKGROUND',(0,0),(0,1),colors.lightblue),
-                    ('TEXTCOLOR',(0,0),(-1,-1),black),
-                    ('ALIGN',(0,0),(-1,-1),'CENTER'),
-                    ('VALIGN',(1,0),(-1,-2),'TOP')]))
+                        ('BACKGROUND',(0,0),(0,1),colors.lightblue),
+                        ('TEXTCOLOR',(0,0),(-1,-1),black),
+                        ('ALIGN',(0,0),(-1,-1),'CENTER'),
+                        ('FONTSIZE', (0, 0), (0, 1), 7),
+                        ('BOTTOMPADDING',(0,0),(0,0),-5),
 
-
-
-tp2 = Paragraph('<para fontSize=7><b>Elastic</b><br/> <b>elongation</b></para>',styles['Normal'])
+                        ]))
+tp2 = Paragraph('<para fontSize=7 >Elastic<br/> elongation</para>',styles['Normal'])
+b2 = [[tp2]]
+tpl2 = Table(b2)
 datatab2 = [
-['0.108' ],
-['%'],
-[tp2]]
+   ['0.108' ],
+   ['%'],
+   ]
 
-tab2=Table(datatab2,colWidths=(20*mm),rowHeights=(10*mm))
+tab2=Table(datatab2,colWidths=(14*mm),rowHeights=(7*mm))
 tab2.setStyle(TableStyle([('TEXTFONT', (0, 0), (-1, -1), 'Times-Bold'),
-                    ('BACKGROUND',(0,0),(0,1),colors.lightblue),
-                    ('TEXTCOLOR',(0,0),(-1,-1),black),
-                    ('ALIGN',(0,0),(-1,-1),'CENTER'),
-                    ('VALIGN',(1,0),(-1,-1),'TOP')]))
-
-
-
-tp3 = Paragraph('<para fontSize=7><b>Permenant</b><br/> <b>elongation</b></para>',styles['Normal'])
+                        ('BACKGROUND',(0,0),(0,1),colors.lightblue),
+                        ('TEXTCOLOR',(0,0),(-1,-1),black),
+                        ('ALIGN',(0,0),(-1,-1),'CENTER'),
+                        ('FONTSIZE', (0, 0), (0, 1), 7),
+                        ('BOTTOMPADDING',(0,0),(0,0),-5),
+                        ]))
+tp3 = Paragraph('<para fontSize =7>Permenant <br/>elongation</para>',styles['Normal'])
+b3  =[[tp3]]
+tpl3 = Table(b3)
 datatab3 = [
-['0.16' ],
-['%'],
-[tp3]]
-tab3=Table(datatab3,colWidths=(20*mm),rowHeights=(10*mm))
+   ['0.16' ],
+   ['%'],
+   ]
+tab3=Table(datatab3,colWidths=(14*mm),rowHeights=(7*mm))
 tab3.setStyle(TableStyle([('TEXTFONT', (0, 0), (-1, -1), 'Times-Bold'),
-                    ('BACKGROUND',(0,0),(0,1),colors.lightblue),
-                    ('TEXTCOLOR',(0,0),(-1,-1),black),
-                    ('VALIGN',(1,0),(-1,-2),'TOP'),
-                    ('ALIGN',(0,0),(0,0),'CENTER'),
-                    ('ALIGN',(0,0),(0,1),'CENTER'),
-                    ('ALIGN',(0,0),(0,2),'CENTER'),
-                    ('ALIGN',(0,0),(0,2),'CENTER'),
-                    ('VALIGN',(1,0),(-1,-2),'TOP')
-                    ]))
+                        ('BACKGROUND',(0,0),(0,1),colors.lightblue),
+                        ('TEXTCOLOR',(0,0),(-1,-1),black),
+                        ('ALIGN',(0,0),(-1,-1),'CENTER'),
+                        ('FONTSIZE', (0, 0), (0, 1), 7),
+                        ('BOTTOMPADDING',(0,0),(0,0),-5),
 
+                        ]))
 
-
-tp4 = Paragraph('<para fontSize=7><b>Lifting height</b></para>',styles['Normal'])
+tp4 = Paragraph('<para fontSize=7>Lifting height</para>',styles['Normal'])
+b4 = [[tp4]]
+tpl4 =Table(b4)
 datatab4 = [
-['<=325' ],
-['m'],
-[tp4]
-]
-tab4=Table(datatab4,colWidths=(20*mm),rowHeights=(10*mm))
+   ['<=325' ],
+   ['m'],
+   ]
+tab4=Table(datatab4,colWidths=(14*mm),rowHeights=(7*mm))
 tab4.setStyle(TableStyle([('TEXTFONT', (0, 0), (-1, -1), 'Times-Bold'),
-                    ('BACKGROUND',(0,0),(0,1),colors.lightblue),
-                    ('TEXTCOLOR',(0,0),(-1,-1),black),
-                    ('ALIGN',(0,0),(-1,-1),'CENTER'),
-                    ('VALIGN',(1,0),(-1,-2),'TOP')]))
+                        ('BACKGROUND',(0,0),(0,1),colors.lightblue),
+                        ('TEXTCOLOR',(0,0),(-1,-1),black),
+                        ('ALIGN',(0,0),(-1,-1),'CENTER'),
+                        ('FONTSIZE', (0, 0), (0, 1), 7),
+                        ('VALIGN',(1,0),(0,1),'TOP'),
+                        ('BOTTOMPADDING',(0,0),(0,0),-5),
 
-table5=[[tab1,tab2,tab3,tab4]]
-tab5 = Table(table5,colWidths=(25*mm),rowHeights=(40*mm))
+                        ('ALIGN',(0,1),(0,0),'CENTER'),
+                        ('ALIGN',(0,1),(0,1),'CENTER'),
+
+                        ]))
+
+table5=[[tab1,tab2,tab3,tab4],
+        [tpl1,tpl2,tpl3,tpl4]]
+tab5 = Table(table5,colWidths=(20*mm),rowHeights=(12*mm))
 tab5.setStyle(TableStyle([('TEXTFONT', (0, 0), (-1, -1), 'Times-Bold'),
 
-                    ('TEXTCOLOR',(0,0),(-1,-1),black),
-                    ('ALIGN',(0,0),(-1,-1),'CENTER'),
-                    ('VALIGN',(1,0),(-1,-2),'TOP')]))
+                        ('TEXTCOLOR',(0,0),(-1,-1),black),
+                        ('ALIGN',(0,0),(-1,-1),'CENTER'),
+                        ('VALIGN',(1,0),(0,1),'TOP'),
+                        ('BOTTOMPADDING',(0,0),(-1,-1),-20),
+                        ('ALIGN',(0,1),(-1,-1),'CENTER'),
+
+                        ]))
 
 p = [[paragar,tab5]]
 para = Table(p,colWidths=(90*mm),rowHeights=(55*mm))
@@ -158,7 +171,6 @@ product = [[prd]]
 pic = Table(product,colWidths=(90*mm),rowHeights=(-10*mm))
 pic.setStyle(TableStyle([('TEXTFONT', (0, 0), (-1, -1), 'Adrianna light italic'),('TEXTCOLOR',(0,0),(-1,-1),black),('TOPPADDING', (0, 0), (0, 0), -170),('VALIGN',(0,0),(-1,-1),'TOP'),('ALIGN',(0,0),(-1,-1),'CENTER')]))
 
-# t5para = Paragraph('<para>Weitere Nennfestigkeiten und/oder Durchmesser(auch imperiable Masse) auf Anfrage<br/>Seildurchmesser-Toleranzen nach EN12385-5/ISO 4344.<br/>Further nominal strengths and/or diameters (including imperial dimenstions) on request.<br/>Rope diameter-tolerances according to EN12385-5/ISO 4344</para>',styles['Normal'])
 tp = Paragraph('<para fontSize=6>Further nominal strengths and/or diameters (including imperial dimenstions) on request.<br/>Rope diameter-tolerances according to EN12385-5/ISO 4344</para>',styles['Normal'])
 tq = [[tp]]
 t6 = Table(tq)
@@ -196,7 +208,7 @@ t5.setStyle(TableStyle([ ('LINEABOVE',(0,1),(-1,1),0.5,colors.black),
                     ('ALIGN', (3, 0), (0, 7), 'CENTER'),
                     ('ALIGN', (4, 0), (0, 7), 'CENTER'),
                     ('ALIGN', (5, 0), (0, 7), 'CENTER'),
-                    ('ALIGN', (1, 0), (2, 7), 'RIGHT'),
+
                     ('LEFTPADDING', (0, 0), (0, 7), 0),
                     ('LEFTPADDING', (1, 0), (1, 7), -5),
                     ('LEFTPADDING', (2, 0), (2, 7), -20),
@@ -207,7 +219,7 @@ t5.setStyle(TableStyle([ ('LINEABOVE',(0,1),(-1,1),0.5,colors.black),
 mid = [[pic,t5],
         ['',[tq]]]
 m = Table(mid)
-elements.append(m)# tabpara = elements.append(Paragraph('<para fontSize=7   align="LEFT">Weitere Nennfestigkeiten und/oder Durchmesser(auch imperiable Masse) auf Anfrage.<br/>Seildurchmesser-Toleranzen nach EN12385-5/ISO 4344.<br/>Further nominal strengths and/or diameters (including imperial dimenstions) on request.<br/>Rope diameter-tolerances according to EN12385-5/ISO 4344.</para>',styles['Normal']))
+elements.append(m)
 
 elements.append(Spacer(0.25*inch,0.25*inch))
 backg = GNAA(bg,9.25*inch,3.5*inch)
@@ -227,5 +239,7 @@ foot3 = [[foot2]]
 f2 = Table(foot3,rowHeights=(65*mm))
 footer = [[foot1,foot2]]
 f = Table(footer)
+elements.append(Spacer(1,12))
 elements.append(f)
+
 doc.build(elements)
