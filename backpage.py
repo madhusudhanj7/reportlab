@@ -55,12 +55,57 @@ product = "stars.jpeg"
 bg = "cables.jpg"
 
 
+
 c.linearGradient(30*mm, 60*mm, 30*mm, 30*mm, (white, grey))
-c.rect(4*inch,9.5*inch,0.5*inch,0.5*inch, fill=1)
-# c.setFillColorRGB(0,0,0.77)
-c.rect(4.75*inch,9.5*inch,0.5*inch,0.5*inch, fill=1)
-c.rect(5.5*inch,9.5*inch,0.5*inch,0.5*inch, fill=1)
-c.rect(6.25*inch,9.5*inch,0.5*inch,0.5*inch, fill=1)
+
+
+c.setFillGray(0.6)
+c.setStrokeColor(colors.white)
+c.rect(4.10*inch,9.5*inch,0.6*inch,0.6*inch, fill=1)
+# c.linearGradient(100*mm, 100*mm, 0.6*inch, 0.6*inch, (white, grey))
+c.setFillColor(colors.black)
+
+c.setFont("Helvetica-Bold", 8)
+c.drawString(4.20*inch, 9.8*inch, "120,000")
+c.drawString(4.23*inch, 9.6*inch, "N/mm2")
+c.setFont("Helvetica", 7)
+c.drawString(4.20*inch, 9.3*inch, "E-Modul")
+c.drawString(4.20*inch, 9.15*inch, "E-Module")
+
+c.setFillGray(0.66)
+c.rect(4.9*inch,9.5*inch,0.6*inch,0.6*inch, fill=1)
+c.setFillColor(colors.black)
+c.setFont("Helvetica-Bold", 8)
+c.drawString(5.05*inch,9.8*inch, "0.108")
+c.drawString(5.15*inch,9.6*inch, "%")
+c.setFont("Helvetica", 7)
+c.drawString(5.0*inch, 9.3*inch, "elastische")
+c.drawString(4.85*inch, 9.15*inch, "Tragseildehnung")
+c.drawString(5.0*inch, 9.0*inch, "Elastic")
+c.drawString(4.95*inch, 8.85*inch, "elongation")
+
+c.setFillGray(0.72)
+c.rect(5.7*inch,9.5*inch,0.6*inch,0.6*inch, fill=1)
+c.setFillColor(colors.black)
+c.setFont("Helvetica-Bold", 8)
+c.drawString(5.85*inch,9.8*inch, "0.16")
+c.drawString(5.9*inch,9.6*inch, "%")
+c.setFont("Helvetica", 7)
+c.drawString(5.70*inch, 9.3*inch, "bleibende")
+c.drawString(5.64*inch, 9.15*inch, "Tragseildehnung")
+c.drawString(5.70*inch, 9.0*inch, "Permenant")
+c.drawString(5.70*inch, 8.85*inch, "elongation")
+
+# c.setFillColor(colors.lightblue)
+c.setFillGray(0.8)
+c.rect(6.5*inch,9.5*inch,0.6*inch,0.6*inch, fill=1)
+c.setFillColor(colors.black)
+c.setFont("Helvetica-Bold", 8)
+c.drawString(6.65*inch,9.8*inch, "<325")
+c.drawString(6.7*inch,9.6*inch, "m")
+c.setFont("Helvetica", 7)
+c.drawString(6.55*inch, 9.3*inch, "Forderhohe")
+c.drawString(6.55*inch, 9.15*inch, "Lifting height")
 
 textobject1 = c.beginText()
 textobject1.setTextOrigin(0.5*inch, 10*inch)
@@ -143,7 +188,15 @@ t5.wrapOn(c, 100, 100)
 t5.drawOn(c, 290, 450)
 
 textobject1 = c.beginText()
-textobject1.setTextOrigin(4*inch, 6*inch)
+textobject1.setTextOrigin(4*inch, 6.1*inch)
+textobject1.setFont("Helvetica", 7)
+textobject1.textLines('''Weitere Nennfestigkeiten und/oder Durchmesser (auch   imperial Masse) auf Anfrage.
+                        Seildurchmesser-Toleranzen nach EN12385-5/ISO 4344.''')
+c.drawText(textobject1)
+textobject = c.beginText()
+
+textobject1 = c.beginText()
+textobject1.setTextOrigin(4*inch, 5.85*inch)
 textobject1.setFont("Helvetica", 7)
 textobject1.textLines('''
                     Further nominal strengths and/or diameters (including imperial dimenstions) on request.

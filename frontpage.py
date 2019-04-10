@@ -26,22 +26,36 @@ from reportlab.lib.units import mm
 from reportlab.lib import colors
 from reportlab.graphics.shapes import *
 from reportlab.platypus import Image
+from reportlab.graphics import shapes
+from reportlab.graphics.charts.textlabels import Label
+from reportlab.graphics import renderPDF, renderPM
+from reportlab.graphics.shapes import Drawing
+from svglib.svglib import svg2rlg
+from reportlab.graphics import renderPDF
+from PIL import Image, ImageFilter
+from svglib.svglib import svg2rlg
+from reportlab.graphics.shapes import Drawing
+from reportlab.graphics import renderSVG
 
 styles=getSampleStyleSheet()
 stylesN = styles['Normal']
 stylesH =styles['Heading1']
 c = Canvas("brugglift.pdf")
 
-logo = "brugg_logo.png"
+logo = "brugglifting.svg"
 logo1 = "brugg.jpg"
+rope = "ropetech.png"
 product = "stars.jpeg"
 bg = "cables.jpg"
 whit = "whity.png"
 
 c.linearGradient(10*mm, 275*mm, 5*mm, 5*mm, (gray, white))
 
-c.drawImage(logo,450,755,width=120,height=60,mask='auto')
+drawing = svg2rlg(logo)
+renderPDF.draw(drawing, c, 450, 795)
+# c.drawString(50, 30, 'My SVG Image')
 
+# c.drawImage(logo,350,750, width= 8*cm, preserveAspectRatio = True)
 
 textobject = c.beginText()
 textobject.setTextOrigin(0.7*inch, 10*inch)
@@ -93,8 +107,8 @@ textobject.textLines('''DAS VOLLSTAHL-AUFZUGSEIL
                      THE STEEL CORE ELEVATOR ROPE''')
 c.drawText(textobject)
 
-c.drawImage(whit,390,10,width=800,height=0.2,mask='auto')
 c.drawImage(logo1,1,2.5,width=750,height=425,mask='auto')
+c.drawInlineImage(rope,45,30,width=100,height=40)
 
 c.showPage()
 
